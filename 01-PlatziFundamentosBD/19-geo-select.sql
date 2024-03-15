@@ -24,6 +24,8 @@ SELECT ST_Distance_Sphere(
 
 
 
+
+
 (
     (
     SELECT `lines`.`id` 
