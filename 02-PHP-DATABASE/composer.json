@@ -1,0 +1,13 @@
+{
+    "name": "jonas/02-php-database",
+    "description": "Proyecto del curso de conexion de php con BD.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jonas0214",
+            "email": "jonas0214@gmail.com"
+        }
+    ],
+    "require": {}
+}
