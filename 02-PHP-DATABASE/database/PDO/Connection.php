@@ -29,7 +29,7 @@ namespace Database\PDO;
 
 
     private function make_connection(){
-        $server ="localhost";
+        $server ="127.0.0.1";
         $username ="jonathan";
         $password ="123";
         $database ="finanzas_personales";

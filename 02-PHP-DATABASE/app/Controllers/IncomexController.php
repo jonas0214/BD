@@ -25,13 +25,13 @@ Class IncomexController{
         $stmt = $connection->prepare("INSERT INTO incomes (payment_method, type, date, amount, description)
         VALUES(?,?,?,?,?)");
 
-        $stmt->bind_param("iisds",$payment_method, $type, $date, $amount, $description);
+        //$stmt->bind_param("iisds",$payment_method, $type, $date, $amount, $description);
 
-        $payment_method = $data['payment_method'];
-        $type = $data['type'];
-        $date = $data['date'];
-        $amount = $data['amount'];
-        $description = $data['description'];
+        // $payment_method = $data['payment_method'];
+        // $type = $data['type'];
+        // $date = $data['date'];
+        // $amount = $data['amount'];
+        // $description = $data['description'];
 
         $stmt -> execute();
 

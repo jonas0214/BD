@@ -2,42 +2,49 @@
 
 namespace App\Controllers;
 
-Class WithdrawallsController{
+use Database\PDO\Connection;
+
+class WithdrawallsController {
 
     /**
-     * Muestra una lista de este recurso
+     * Muestra una lista de este recurso.
      */
-    public function index(){}
+    public function index() {}
 
     /**
      * Muestra un formulario para crear un nuevo recurso.
      */
-    public function create(){}
+    public function create() {}
     
     /**
-     * Guarda un nuevo recurso en  la base de datos.
+     * Guarda un nuevo recurso en la base de datos.
      */
-    public function store(){}
+    public function store($data) {
+        $connection = Connection::getInstance()->get_database_instance(); // Obtener la instancia de la conexión PDO a la base de datos.
+        
+        $stmt = $connection->prepare("INSERT INTO withdrawals(payment_method, type, date, amount, description)
+        VALUES(:payment_method, :type, :date, :amount, :description)");
+
+        $stmt->execute($data);
+    }
     
     /**
      * Muestra un único recurso especificado.
      */
-    public function show(){}
+    public function show() {}
 
     /**
      * Edita un único recurso.
      */
-    public function edit(){}
+    public function edit() {}
 
     /**
      * Actualiza un recurso especifico en una base de datos.
      */
-    public function update(){}
+    public function update() {}
 
     /**
      * Elimina un recurso especifico.
      */
-    public function destroy(){}
-
-
+    public function destroy() {}
 }
