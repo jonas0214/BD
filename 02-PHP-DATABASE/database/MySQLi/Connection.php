@@ -1,19 +1,52 @@
 <?php
 
-$server ="localhost";
-$username ="jonathan";
-$password ="123";
-$database ="finanzas_personales";
+namespace Database\MySQLi;
 
-//$mysqli = mysqli_connect($server, $username, $password, $database);
+ class Connection {
+    
+    private static $instance;
+    private $connection;
 
-$mysqli = new mysqli($server, $username, $password, $database);
+    public function __construct() {
+        $this->make_connection();
+    }
 
-//COMPROBAR CONECCION
-if($mysqli -> connect_errno )
- die("falló la conexión: {$mysqli->connect_error}");
+    public static function getInstance(){
 
-$setnames = $mysqli->prepare("SET NAMES 'utf8'");
-$setnames->execute();
+        if(!self::$instance instanceof self)
+            self::$instance = new self();
 
-var_dump($setnames);
+        return self :: $instance;
+
+
+    }
+
+    public function get_database_instance(){
+        return  $this->connection;
+    }
+
+
+
+    private function make_connection(){
+        $server ="localhost";
+        $username ="jonathan";
+        $password ="123";
+        $database ="finanzas_personales";
+
+        //$mysqli = mysqli_connect($server, $username, $password, $database);
+
+        $mysqli = new \mysqli($server, $username, $password, $database);
+
+        //COMPROBAR CONECCION
+        if($mysqli -> connect_errno )
+        die("falló la conexión: {$mysqli->connect_error}");
+
+        $setnames = $mysqli->prepare("SET NAMES 'utf8'");
+        $setnames->execute();
+
+        $this->connection = $mysqli;
+
+    }
+
+ }
+
