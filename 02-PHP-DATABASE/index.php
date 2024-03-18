@@ -17,12 +17,21 @@ require("vendor/autoload.php");
 //     "description"=> "Pago de mi salario por mi arduo y buen trabajo"   
 //]);
 
-$withdrawal_controller = new WithdrawallsController();
-$withdrawal_controller-> store([
-    "payment_method" => PaymentMethodEnum::CreditCard-> value,
-    "type"=> WithdrawalTypeEnum::purchase->value,
-    "date"=> date("Y-m-d H:i:s"),
-    "amount"=> 50,
-    "description" => "Compre juguetes para mis michis"
+// $withdrawal_controller = new WithdrawallsController();
+// $withdrawal_controller-> store([
+//     "payment_method" => PaymentMethodEnum::CreditCard-> value,
+//     "type"=> WithdrawalTypeEnum::purchase->value,
+//     "date"=> date("Y-m-d H:i:s"),
+//     "amount"=> 50,
+//     "description" => "Compre juguetes para mis michis"
 
-]);
+// ]);
+
+// $withdrawal_controller = new WithdrawallsController();
+// $withdrawal_controller->index();
+
+//  $withdrawal_controller = new WithdrawallsController();
+//  $withdrawal_controller->show(1);
+
+$incomes_controller = new IncomexController();
+$incomes_controller->index();

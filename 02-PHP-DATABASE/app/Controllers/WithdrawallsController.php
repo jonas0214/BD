@@ -6,10 +6,42 @@ use Database\PDO\Connection;
 
 class WithdrawallsController {
 
+    private $connection;
+
+    public function __construct()   
+    {
+        $this-> connection = Connection::getInstance()->get_database_instance();;
+    }
+
+
     /**
      * Muestra una lista de este recurso.
      */
-    public function index() {}
+    public function index() {
+
+         $stmt = $this->connection->prepare("SELECT * FROM withdrawals ");
+         $stmt->execute();
+
+         $results = $stmt->fetchAll();
+
+         foreach( $results as $result)
+         echo "Gastaste". $result["amount"] . " USD, en " . $result["description"] . "\n";
+
+        // esto es un Fetch column.
+    
+        // $stmt = $this->connection->prepare("SELECT amount,  description FROM withdrawals ");
+        // $stmt->execute();
+        
+        // $results = $stmt->fetchAll(\PDO::FETCH_COLUMN,0);
+
+        // // foreach($results as $result)
+        // //     echo "GASTASTE $result UDS \n";
+
+        // var_dump($results);
+
+
+
+    }
 
     /**
      * Muestra un formulario para crear un nuevo recurso.
@@ -21,9 +53,9 @@ class WithdrawallsController {
      */
     public function store($data) {
         
-        $connection = Connection::getInstance()->get_database_instance(); // Obtener la instancia de la conexión PDO a la base de datos.
+       
         
-        $stmt = $connection->prepare("INSERT INTO withdrawals(payment_method, type, date, amount, description)
+        $stmt = $this->connection->prepare("INSERT INTO withdrawals(payment_method, type, date, amount, description)
         VALUES(:payment_method, :type, :date, :amount, :description)");
         
         $stmt->bindValue(":payment_method", $data["payment_method"]);
@@ -38,7 +70,18 @@ class WithdrawallsController {
     /**
      * Muestra un único recurso especificado.
      */
-    public function show() {}
+    public function show($id) {
+        $stmt = $this->connection->prepare(" SELECT * FROM withdrawals WHERE id=:id");
+        $stmt->execute([
+            ":id" => $id
+        ]);
+
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        
+         echo"El registro con id $id dice que te gastaste {$result['amount']} USD en {$result['description']} 
+         el dia {$result['date']}";
+    }
 
     /**
      * Edita un único recurso.
